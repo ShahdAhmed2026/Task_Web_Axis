@@ -10,87 +10,69 @@ import pages.*;
 @Feature("Add Product to Cart")
 @Listeners({AllureTestNg.class})
 public class AddProductToCartTest extends BaseTest {
-    @Test
-    @Description("Full flow: Login -> Accessories -> Shoes -> Add product to cart")
-    public void verifyFullShoppingFlow() throws InterruptedException{
-        //login
+    //helper method to open Dorian product details page avoid code duplication between tests
+    private ProductDetailsPage openDorianProduct() {
         driver.get(Login_Url);
+        //login
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("shahd@gmail.com", "1234567");
-        //Assert.assertEquals(loginPage.getPageHeader(), "MY DASHBOARD"); --->   //stall, so I will check the URL instead
+
         Assert.assertTrue(loginPage.isLoginSuccessful());
+        //hover
 
-
-
-        // Hover and navigate to shoes
         HomePage homePage = new HomePage(driver);
         homePage.hoverAccessories();
-        Assert.assertTrue(homePage.isDropdownVisible());  //lazm at2kd en dropdown mawgoda aslun b3d elhover
+        Assert.assertTrue(homePage.isDropdownVisible());
         homePage.clickShoes();
 
-        // sort and select product
+        //sort and navigate to product
         ShoesPage shoesPage = new ShoesPage(driver);
         Assert.assertEquals(shoesPage.getHeader(), "SHOES");
         shoesPage.sortByPriceAscending();
         Assert.assertTrue(shoesPage.isSortedAscending());
         shoesPage.openDorian();
 
-        // product details and add to cart
         ProductDetailsPage product = new ProductDetailsPage(driver);
-        Assert.assertEquals(
-                product.getProductName(),
-                "DORIAN PERFORATED OXFORD"
-        );
+        Assert.assertEquals(product.getProductName(), "DORIAN PERFORATED OXFORD");
+        return product;
+    }
+
+    @Test
+    @Description("Full flow: Login -> Accessories -> Shoes -> Add product to cart")
+    public void verifyFullShoppingFlow() {
+        ProductDetailsPage product = openDorianProduct();
+
         product.selectColor();
         product.selectSize();
+
         Assert.assertTrue(product.isColorSelected());
         Assert.assertTrue(product.isSizeSelected());
+
         product.addToCart();
 
-// verify added to cart message
         CartPage cart = new CartPage(driver);
-        Assert.assertEquals(
-                cart.getSuccessMessage(),
-                "Dorian Perforated Oxford was added to your shopping cart."
-        );}
+        Assert.assertEquals(cart.getSuccessMessage(), "Dorian Perforated Oxford was added to your shopping cart.");
+    }
 
     @Test
     @Description("Verify color is required before adding product to cart")
     public void verifyColorIsRequiredBeforeAddToCart() {
-        driver.get(Login_Url);
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("shahd@gmail.com", "1234567");
+        ProductDetailsPage product = openDorianProduct();
 
-        HomePage homePage = new HomePage(driver);
-        homePage.hoverAccessories();
-        homePage.clickShoes();
-
-        ShoesPage shoesPage = new ShoesPage(driver);
-        shoesPage.openDorian();
-
-        ProductDetailsPage product = new ProductDetailsPage(driver);
         product.selectSize();
         product.clickAddToCartForValidation();
+
         Assert.assertEquals(product.getColorRequiredMessage(), "This is a required field.");
     }
 
     @Test
-    @Description("Verify Size is required before adding product to cart")
+    @Description("Verify size is required before adding product to cart")
     public void verifySizeIsRequiredBeforeAddToCart() {
-        driver.get(Login_Url);
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("shahd@gmail.com", "1234567");
+        ProductDetailsPage product = openDorianProduct();
 
-        HomePage homePage = new HomePage(driver);
-        homePage.hoverAccessories();
-        homePage.clickShoes();
-
-        ShoesPage shoesPage = new ShoesPage(driver);
-        shoesPage.openDorian();
-
-        ProductDetailsPage product = new ProductDetailsPage(driver);
         product.selectColor();
         product.clickAddToCartForValidation();
+
         Assert.assertEquals(product.getSizeRequiredMessage(), "This is a required field.");
     }
-    }
+}
