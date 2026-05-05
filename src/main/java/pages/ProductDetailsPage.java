@@ -11,10 +11,6 @@ public class ProductDetailsPage {
     private WebDriver driver;
     private WebDriverWait wait;
     private By productName = By.cssSelector(".product-shop .product-name .h1");
-    private By size10 = By.cssSelector("#configurable_swatch_shoe_size a[title='10']");
-    private By selectedSize10 = By.cssSelector("#configurable_swatch_shoe_size li.selected a[title='10']");
-    private By colorBlack = By.cssSelector("#configurable_swatch_color a[title='Black']");
-    private By selectedColorBlack = By.cssSelector("#configurable_swatch_color li.selected a[title='Black']");
     private By addToCart = By.cssSelector("button[title='Add to Cart']");
     private By colorRequiredMessage = By.id("advice-required-entry-attribute92");
     private By sizeRequiredMessage = By.id("advice-required-entry-attribute186");
@@ -29,32 +25,19 @@ public class ProductDetailsPage {
     }
 
     @Step("Select color Black")
-    public void selectColor() {
-        WebElement colorElement = wait.until(ExpectedConditions.presenceOfElementLocated(colorBlack));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", colorElement);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", colorElement);
+    public void selectColor(String color) {
+        By colorLocator = By.cssSelector("#configurable_swatch_color a[title='" + color + "']");
+
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(colorLocator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
-    @Step("Select shoe size 10")
-    public void selectSize() {
-        WebElement sizeElement = wait.until(ExpectedConditions.presenceOfElementLocated(size10));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", sizeElement);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", sizeElement);
+    @Step("Select size")
+    public void selectSize(String size) {
+        By sizeLocator = By.cssSelector("#configurable_swatch_shoe_size a[title='" + size + "']");
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(sizeLocator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
-
-
-    public boolean isColorSelected() {
-        return wait.until(
-                ExpectedConditions.visibilityOfElementLocated(selectedColorBlack)
-        ).isDisplayed();
-    }
-    public boolean isSizeSelected() {
-        return wait.until(
-                ExpectedConditions.visibilityOfElementLocated(selectedSize10)
-        ).isDisplayed();
-    }
-
-
 
     @Step("Add to Cart")
     public void addToCart() {

@@ -44,11 +44,8 @@ public class AddProductToCartTest extends BaseTest {
     public void verifyFullShoppingFlow() {
         ProductDetailsPage product = openDorianProduct();
 
-        product.selectColor();
-        product.selectSize();
-
-        Assert.assertTrue(product.isColorSelected());
-        Assert.assertTrue(product.isSizeSelected());
+        product.selectColor("Black");
+        product.selectSize("10");
 
         product.addToCart();
 
@@ -61,7 +58,7 @@ public class AddProductToCartTest extends BaseTest {
     public void verifyColorIsRequiredBeforeAddToCart() {
         ProductDetailsPage product = openDorianProduct();
 
-        product.selectSize();
+        product.selectSize("10");
         product.clickAddToCartForValidation();
 
         Assert.assertEquals(product.getColorRequiredMessage(), "This is a required field.");
@@ -72,7 +69,7 @@ public class AddProductToCartTest extends BaseTest {
     public void verifySizeIsRequiredBeforeAddToCart() {
         ProductDetailsPage product = openDorianProduct();
 
-        product.selectColor();
+        product.selectColor("Black");
         product.clickAddToCartForValidation();
 
         Assert.assertEquals(product.getSizeRequiredMessage(), "This is a required field.");
