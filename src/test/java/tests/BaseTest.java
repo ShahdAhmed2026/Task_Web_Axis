@@ -12,8 +12,6 @@ public class BaseTest {
     //--All Urls--//
     protected String Register_Url = "https://ecommerce.tealiumdemo.com/customer/account/create/";
     protected String Login_Url = "https://ecommerce.tealiumdemo.com/customer/account/login/";
-
-
     // ------ //
     protected WebDriver driver;
     @BeforeMethod

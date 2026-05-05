@@ -64,7 +64,6 @@ public class ProductDetailsPage {
         ));
     }
 
-
     public String getColorRequiredMessage() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(colorRequiredMessage)).getText();
     }

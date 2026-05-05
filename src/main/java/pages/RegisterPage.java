@@ -20,7 +20,7 @@ public class RegisterPage {
     private By password = By.id("password");
     private By confirmPassword = By.id("confirmation");
     private By registerButton = By.cssSelector("button[title='Register']");
-    //private By pageHeader = By.tagName("h1");
+    private By pageHeader = By.tagName("h1");
 
     public RegisterPage(WebDriver driver) {
         this.driver = driver;
@@ -89,5 +89,10 @@ public class RegisterPage {
     public String getEmailValidationMessage() {
         WebElement emailElement = wait.until(ExpectedConditions.visibilityOfElementLocated(email));
         return emailElement.getAttribute("validationMessage");
+    }
+
+    @Step("Get page header text")
+    public String getPageHeaderText() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(pageHeader)).getText();
     }
 }

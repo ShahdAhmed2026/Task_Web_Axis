@@ -25,11 +25,6 @@ public class HomePage {
         actions.moveToElement(element).perform();
     }
 
-/*    @Step("Check dropdown is visible")      //at2kd en shoes mawgoda aslun b3d elhover
-    public boolean isDropdownVisible() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(shoes)).isDisplayed();
-    }*/
-
     @Step("Click Shoes")
     public void clickShoes() {
         hoverAccessories();

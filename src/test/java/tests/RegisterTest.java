@@ -29,7 +29,7 @@ public class RegisterTest extends BaseTest {
                 email,
                 ConfigReader.get("registerPassword")
         );
-        Assert.assertEquals( driver.findElement(By.tagName("h1")).getText(), "MY DASHBOARD" );
+        Assert.assertEquals(registerPage.getPageHeaderText(), "MY DASHBOARD");
     }
 
     @Test
@@ -45,7 +45,7 @@ public class RegisterTest extends BaseTest {
                 email,
                 ConfigReader.get("registerPassword")
         );
-        Assert.assertEquals( driver.findElement(By.tagName("h1")).getText(), "MY DASHBOARD" );
+        Assert.assertEquals(registerPage.getPageHeaderText(), "MY DASHBOARD");
     }
 
     @Test

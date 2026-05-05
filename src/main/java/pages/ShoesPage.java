@@ -58,14 +58,10 @@ public class ShoesPage {
         }
         List<Double> expectedPrices = new ArrayList<>(actualPrices);
         Collections.sort(expectedPrices);
-
         System.out.println("Actual Prices: " + actualPrices);
         System.out.println("Expected Sorted Prices: " + expectedPrices);
-
         return actualPrices.equals(expectedPrices);
     }
-
-
 
     @Step("Open Dorian Shoes")
     public void openDorian() {
