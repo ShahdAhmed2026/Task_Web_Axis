@@ -21,8 +21,8 @@ public class AddProductToCartTest extends BaseTest {
         //hover
 
         HomePage homePage = new HomePage(driver);
-        homePage.hoverAccessories();
-        Assert.assertTrue(homePage.isDropdownVisible());
+       // homePage.hoverAccessories();
+       // Assert.assertTrue(homePage.isDropdownVisible());
         homePage.clickShoes();
 
         //sort and navigate to product

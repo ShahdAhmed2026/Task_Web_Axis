@@ -25,13 +25,15 @@ public class HomePage {
         actions.moveToElement(element).perform();
     }
 
-    @Step("Check dropdown is visible")      //at2kd en shoes mawgoda aslun b3d elhover
+/*    @Step("Check dropdown is visible")      //at2kd en shoes mawgoda aslun b3d elhover
     public boolean isDropdownVisible() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(shoes)).isDisplayed();
-    }
+    }*/
 
     @Step("Click Shoes")
     public void clickShoes() {
+        hoverAccessories();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(shoes));
         WebElement shoeElement = wait.until(ExpectedConditions.elementToBeClickable(shoes));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", shoeElement);
     }

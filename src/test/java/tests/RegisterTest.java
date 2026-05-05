@@ -14,7 +14,6 @@ public class RegisterTest extends BaseTest {
 
     @Test
     @Description("Verify that user can register successfully with valid data")
-    @Severity(SeverityLevel.CRITICAL)
     public void Veifyregister() {
         driver.get(Register_Url);
         RegisterPage registerPage = new RegisterPage(driver);
@@ -33,13 +32,11 @@ public class RegisterTest extends BaseTest {
 
     @Test
     @Description("Verify that Middle name is optional and user can register successfully without providing it")
-    @Severity(SeverityLevel.CRITICAL)
     public void VerifyRegisterWithoutMiddleName() {
         driver.get(Register_Url);
         RegisterPage registerPage = new RegisterPage(driver);
-                             //dynamic naming 3shan kol mara lazm email mo5tlf
+      //dynamic naming 3shan kol mara lazm email mo5tlf
       String email = "test" + System.currentTimeMillis() + "@gmail.com";
-
         registerPage.RegisterWithoutMiddleName(
                 "Shahd",
                 "Ahmed",
