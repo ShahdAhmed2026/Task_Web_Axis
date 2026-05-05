@@ -10,10 +10,11 @@ Allure installed and added to Environment Variables
 git clone https://github.com/ShahdAhmed2026/Task_Web_Axis.git
 cd Task_Web_Axis
 
-### 2.Open the project terminal and run:
 
-Remove-Item -Recurse -Force target                
-
+### 2. Open project terminal then Run Tests
 mvn clean test
 
-allure serve allure-results
+
+### 3. Generate and Open Allure Report
+
+allure serve target/allure-results
