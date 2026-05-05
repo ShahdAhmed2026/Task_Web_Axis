@@ -11,7 +11,8 @@ git clone https://github.com/ShahdAhmed2026/Task_Web_Axis.git
 cd Task_Web_Axis
 
 ### 2.Open the project terminal and run:
-Remove-Item -Recurse -Force target                (optional but recommended, as previous build files may cause conflicts)
+
+Remove-Item -Recurse -Force target                
 
 mvn clean test
 
