@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import utils.ConfigReader;
 
 @Feature("User Login")
 @Listeners({AllureTestNg.class})
@@ -16,8 +17,8 @@ public class LoginTest extends BaseTest {
         driver.get(Login_Url);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(
-                "shahd@gmail.com",
-                "1234567"
+                ConfigReader.get("validEmail"),
+                ConfigReader.get("validPassword")
         );
         Assert.assertEquals(loginPage.getPageHeader(), "MY DASHBOARD");
     }
@@ -31,8 +32,8 @@ public class LoginTest extends BaseTest {
         driver.get(Login_Url);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(
-                "shahd@gmail.com",
-                "12"
+                ConfigReader.get("validEmail"),
+                ConfigReader.get("invalidPassword")
         );
         Assert.assertTrue(
                 loginPage.getErrorMessage().contains("Invalid login or password")

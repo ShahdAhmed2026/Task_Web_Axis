@@ -2,11 +2,13 @@ package tests;
 
 import io.qameta.allure.*;
 import io.qameta.allure.testng.AllureTestNg;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.RegisterPage;
+import utils.ConfigReader;
 
 @Feature("User Registration")
 @Listeners({AllureTestNg.class})
@@ -21,11 +23,11 @@ public class RegisterTest extends BaseTest {
         String email = "test" + System.currentTimeMillis() + "@gmail.com";
 
         registerPage.register(
-                "Abdelrahman",
-                "Ahmed",
-                "Ali",
+                ConfigReader.get("firstName"),
+                ConfigReader.get("middleName"),
+                ConfigReader.get("lastName"),
                 email,
-                "Password222"
+                ConfigReader.get("registerPassword")
         );
         Assert.assertEquals( driver.findElement(By.tagName("h1")).getText(), "MY DASHBOARD" );
     }
@@ -38,10 +40,10 @@ public class RegisterTest extends BaseTest {
       //dynamic naming 3shan kol mara lazm email mo5tlf
       String email = "test" + System.currentTimeMillis() + "@gmail.com";
         registerPage.RegisterWithoutMiddleName(
-                "Shahd",
-                "Ahmed",
+                ConfigReader.get("firstName"),
+                ConfigReader.get("lastName"),
                 email,
-                "Password111"
+                ConfigReader.get("registerPassword")
         );
         Assert.assertEquals( driver.findElement(By.tagName("h1")).getText(), "MY DASHBOARD" );
     }
@@ -52,16 +54,14 @@ public class RegisterTest extends BaseTest {
         driver.get(Register_Url);
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.register(
-                "Shahd",
-                "Ali",
-                "Ahmed",
-                "invalidEmail",
-                "Password123"
+                ConfigReader.get("firstName"),
+                ConfigReader.get("middleName"),
+                ConfigReader.get("lastName"),
+                ConfigReader.get("invalidEmail"),
+                ConfigReader.get("registerPassword")
         );
         Assert.assertTrue(
                 registerPage.getEmailValidationMessage().contains("@")
         ); }
-
-
 
 }

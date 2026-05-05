@@ -5,6 +5,7 @@ import io.qameta.allure.testng.AllureTestNg;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.ConfigReader;
 import pages.*;
 
 @Feature("Add Product to Cart")
@@ -15,14 +16,15 @@ public class AddProductToCartTest extends BaseTest {
         driver.get(Login_Url);
         //login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("shahd@gmail.com", "1234567");
+        loginPage.login(
+                ConfigReader.get("validEmail"),
+                ConfigReader.get("validPassword")
+        );
 
         Assert.assertTrue(loginPage.isLoginSuccessful());
-        //hover
 
+        //hover
         HomePage homePage = new HomePage(driver);
-       // homePage.hoverAccessories();
-       // Assert.assertTrue(homePage.isDropdownVisible());
         homePage.clickShoes();
 
         //sort and navigate to product
